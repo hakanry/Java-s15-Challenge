@@ -1,3 +1,7 @@
+package model;
+
+import model.book.Book;
+
 import java.util.Date;
 import java.util.Set;
 
