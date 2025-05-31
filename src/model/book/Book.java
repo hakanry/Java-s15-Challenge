@@ -15,8 +15,9 @@ public abstract class Book implements Comparable<Book>{
     private String edition;
     private String dateOfPurchase;
     private Person owner;
+    private BookType bookType;
 
-    public Book(long bookID, Author author, String name, double price, BookStatus status, String edition, String dateOfPurchase, Person owner) {
+    public Book(long bookID, Author author, String name, double price, BookStatus status, String edition, String dateOfPurchase, Person owner,BookType bookType) {
         this.bookID = bookID;
         this.author = author;
         this.name = name;
@@ -25,10 +26,27 @@ public abstract class Book implements Comparable<Book>{
         this.edition = edition;
         this.dateOfPurchase = dateOfPurchase;
         this.owner = owner;
+        this.bookType = bookType;
     }
 
     public long getBookID() {
         return bookID;
+    }
+
+    public BookType getBookType() {
+        return bookType;
+    }
+
+    public void setAuthor(Author author) {
+        this.author = author;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public void setPrice(double price) {
+        this.price = price;
     }
 
     public double getPrice() {
@@ -67,17 +85,7 @@ public abstract class Book implements Comparable<Book>{
         this.status = status;
     }
 
-    public String display() {
-        return
-                "bookID=" + bookID +
-                ", author=" + author.getName() +
-                ", name='" + name + '\'' +
-                ", price=" + price +
-                ", status='" + status + '\'' +
-                ", edition='" + edition + '\'' +
-                ", dateOfPurchase=" + dateOfPurchase +
-                ", owner=" + owner.getName() ;
-    }
+    public abstract String display();
     @Override
     public boolean equals(Object o) {
         if (o == null || getClass() != o.getClass()) return false;
