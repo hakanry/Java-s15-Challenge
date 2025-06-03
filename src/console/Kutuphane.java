@@ -5,6 +5,7 @@ import model.book.*;
 import model.person.Author;
 import model.person.Librarian;
 import model.person.Reader;
+import service.BookService;
 
 import java.util.LinkedList;
 import java.util.List;
@@ -16,46 +17,71 @@ public class Kutuphane {
         Librarian librarian = new Librarian("Hakan","12345");
         Library library = Library.getInstance(librarian);
 
-        Book journal1 = new Journals(1L, new Author("J.K. Rowling"), "Harry Potter and the Sorcerer's Stone", 39.99, BookStatus.BOSTA, "1st", "2001-06-26", new Reader("Library"),BookType.JOURNALS);
-        Book journal2 = new Journals(2L, new Author("George Orwell"), "1984", 29.90, BookStatus.KIRALANDI, "3rd", "2010-11-12", new Reader("John Doe"),BookType.JOURNALS);
-        Book journal3 = new Journals(3L, new Author("Scientific Society"), "Journal of Advanced Physics", 45.00, BookStatus.BOSTA, "Vol. 22", "2023-03-01",new Reader("Library"),BookType.JOURNALS);
+        BookService bookService = new BookService();
 
-        Book magazine1 = new Magazines(4L, new Author("Nature Group"), "Nature Magazine - July 2024", 27.45, BookStatus.BOSTA, "July 2024", "2024-07-01", new Reader("Library"),BookType.MAGAZINES);
-        Book magazine2 = new Magazines(5L, new Author("ScienceWeekly"), "Science Weekly - March Edition", 30.00, BookStatus.BOSTA, "March 2023", "2023-03-14", new Reader("Library"),BookType.MAGAZINES);
-        Book magazine3 = new Magazines(6L, new Author("Tech Today"), "AI Trends Journal", 59.90, BookStatus.SATILDI, "Issue 15", "2022-12-12", new Reader("Kemal Yılmaz"),BookType.MAGAZINES);
+        library.addNewBook(bookService.createBook(
+                1L, new Author("J.K.Rowling"), "Harry Potter and the Sorcerer's Stone",
+                39.99, BookStatus.BOSTA, "1st", "2001-06-26", new Reader("Library"), BookType.JOURNALS
+        ));
 
-        Book studyBook1 = new StudyBooks(7L, new Author("Harper Lee"), "To Kill a Mockingbird", 34.50, BookStatus.BOSTA, "5th", "2012-08-20", new Reader("Library"),BookType.STUDYBOOKS);
-        Book studyBook2 = new StudyBooks(8L, new Author("Gabriel García Márquez"), "One Hundred Years of Solitude", 33.80, BookStatus.KIRALANDI, "3rd", "2015-09-09", new Reader("Zeynep Arı"),BookType.STUDYBOOKS);
-        Book studyBook3 = new StudyBooks(9L, new Author("Fyodor Dostoevsky"), "Crime and Punishment", 42.75, BookStatus.SATILDI, "8th", "2021-04-04", new Reader("Ahmet Kaya"),BookType.STUDYBOOKS);
+        library.addNewBook(bookService.createBook(
+                2L, new Author("GeorgeOrwell"), "1984",
+                29.90, BookStatus.KIRALANDI, "3rd", "2010-11-12", new Reader("John Doe"), BookType.JOURNALS
+        ));
 
-        library.addNewBook(journal1);
-        library.addNewBook(journal2);
-        library.addNewBook(journal3);
-        library.addNewBook(magazine1);
-        library.addNewBook(magazine2);
-        library.addNewBook(magazine3);
-        library.addNewBook(studyBook1);
-        library.addNewBook(studyBook2);
-        library.addNewBook(studyBook3);
+        library.addNewBook(bookService.createBook(
+                3L, new Author("Scientific Society"), "Journal of Advanced Physics",
+                45.00, BookStatus.BOSTA, "Vol. 22", "2023-03-01", new Reader("Library"), BookType.JOURNALS
+        ));
 
+        library.addNewBook(bookService.createBook(
+                4L, new Author("NatureGroup"), "Nature Magazine - July 2024",
+                27.45, BookStatus.BOSTA, "July 2024", "2024-07-01", new Reader("Library"), BookType.MAGAZINES
+        ));
 
-        System.out.println("Kütüphane Otomasyonuna Hoşgeldiniz.");
+        library.addNewBook(bookService.createBook(
+                5L, new Author("ScienceWeekly"), "Science Weekly - March Edition",
+                30.00, BookStatus.BOSTA, "March 2023", "2023-03-14", new Reader("Library"), BookType.MAGAZINES
+        ));
+
+        library.addNewBook(bookService.createBook(
+                6L, new Author("TechToday"), "AI Trends Journal",
+                59.90, BookStatus.SATILDI, "Issue 15", "2022-12-12", new Reader("Kemal Yılmaz"), BookType.MAGAZINES
+        ));
+
+        library.addNewBook(bookService.createBook(
+                7L, new Author("HarperLee"), "To Kill a Mockingbird",
+                34.50, BookStatus.BOSTA, "5th", "2012-08-20", new Reader("Library"), BookType.STUDYBOOKS
+        ));
+
+        library.addNewBook(bookService.createBook(
+                8L, new Author("GabrielGarcíaMárquez"), "One Hundred Years of Solitude",
+                33.80, BookStatus.KIRALANDI, "3rd", "2015-09-09", new Reader("Zeynep Arı"), BookType.STUDYBOOKS
+        ));
+
+        library.addNewBook(bookService.createBook(
+                9L, new Author("FyodorDostoevsky"), "Crime and Punishment",
+                42.75, BookStatus.SATILDI, "8th", "2021-04-04", new Reader("Ahmet Kaya"), BookType.STUDYBOOKS
+        ));
+
+        System.out.println("=====   KÜTÜPHANE OTOMASYONU   =====");
 
         Scanner scanner = new Scanner(System.in);
 
         int secilenIslem;
 
         do{
-            System.out.println("    Yapmak istediğiniz işlemi seçiniz...");
-            System.out.println("        1-KİTAP EKLEME");
-            System.out.println("        2-KİTAP SEÇME");
-            System.out.println("        3-KİTAP GÜNCELLEME");
-            System.out.println("        4-KİTAP SİLME");
-            System.out.println("        5-KATEGORİYE GÖRE KİTAPLARI LİSTELEME");
-            System.out.println("        6-YAZARA GÖRE KİTAPLARI LİSTELEME");
-            System.out.println("        7-KİTAP ÖDÜNÇ ALMA");
-            System.out.println("        8-KİTAP TESLİM ETME");
-            System.out.println("        0-OTOMASYONDAN ÇIKIŞ");
+            System.out.println("Yapmak istediğiniz işlemi seçiniz...");
+            System.out.println("        1 - KİTAP EKLEME");
+            System.out.println("        2 - KİTAP ARAMA");
+            System.out.println("        3 - KİTAP GÜNCELLEME");
+            System.out.println("        4 - KİTAP SİLME");
+            System.out.println("        5 - KATEGORİYE GÖRE KİTAPLARI LİSTELEME");
+            System.out.println("        6 - YAZARA GÖRE KİTAPLARI LİSTELEME");
+            System.out.println("        7 - KİTAP ÖDÜNÇ ALMA");
+            System.out.println("        8 - KİTAP SATIN ALMA");
+            System.out.println("        9 - KİTAP TESLİM ETME");
+            System.out.println("        0 - OTOMASYONDAN ÇIKIŞ");
             secilenIslem = scanner.nextInt();
             switch (secilenIslem){
                 case 1:
@@ -80,9 +106,9 @@ public class Kutuphane {
                     break;
 
                 case 2:
-                    System.out.print("Hangisiyle arama yapma istiyorsunuz?");
-                    System.out.print("1-ID'ye göre");
-                    System.out.print("2-İsim veya yazara göre");
+                    System.out.println("Hangisiyle arama yapma istiyorsunuz?");
+                    System.out.println("1 - ID'ye göre");
+                    System.out.println("2 - İsim veya yazara göre");
                     int secim = scanner.nextInt();
                     if(secim == 1){
                         System.out.print("Lütfen ID giriniz: ");
@@ -96,7 +122,7 @@ public class Kutuphane {
                         }
                     }
                     else if(secim == 2){
-                        System.out.print("Lütfen isim veya yazar giriniz: ");
+                        System.out.println("Lütfen isim veya yazar giriniz: ");
                         String NorA = scanner.next();
 
                         if(librarian.searchBook(NorA) == null)
@@ -112,13 +138,13 @@ public class Kutuphane {
                     }
                     break;
                 case 3:
-                    System.out.print("Güncellemek istediğiniz kitabın ID sini giriniz :   ");
+                    System.out.println("Güncellemek istediğiniz kitabın ID sini giriniz :   ");
                     int girilenID = scanner.nextInt();
                     List<Book> b = librarian.searchBook(girilenID);
                     System.out.println("Güncellenecek kitaptan bir özelliği seçin..");
-                    System.out.println("1-İsim");
-                    System.out.println("2-Yazar");
-                    System.out.println("3-Ücret");
+                    System.out.println("1 - İsim");
+                    System.out.println("2 - Yazar");
+                    System.out.println("3 - Ücret");
                     int secimi = scanner.nextByte();
                     switch (secimi){
                         case 1:
@@ -139,32 +165,32 @@ public class Kutuphane {
                     }
                     break;
                 case 4:
-                    System.out.print("Silmek istediğiniz kitabın ID'sini giriniz:   ");
+                    System.out.println("Silmek istediğiniz kitabın ID'sini giriniz:   ");
                     int silmeSecimi = scanner.nextByte();
                     System.out.println("Silme işlemi gerçekleşti.Silinen: "+librarian.searchBook(silmeSecimi).get(0));
-                    library.getBooks().remove(librarian.searchBook(silmeSecimi).get(0));
+                    library.showBooks().remove(librarian.searchBook(silmeSecimi).get(0));
                     break;
                 case 5:
                     System.out.println("Kategori seçiniz...");
-                    System.out.println("1-JOURNALS");
-                    System.out.println("2-MAGAZINES");
-                    System.out.println("3-STUDY BOOKS");
+                    System.out.println("1 - JOURNALS");
+                    System.out.println("2 - MAGAZINES");
+                    System.out.println("3 - STUDY BOOKS");
                     int kategori = scanner.nextInt();
                     switch (kategori){
                         case 1:
-                            List<Book> journals = library.getBooks().stream().filter(book -> book.getBookType() == BookType.JOURNALS).toList();
+                            List<Book> journals = library.showBooks().stream().filter(book -> book.getBookType() == BookType.JOURNALS).toList();
                             for(Book i : journals){
                                 System.out.println(i.display());
                             }
                             break;
                         case 2:
-                            List<Book> magazines = library.getBooks().stream().filter(book -> book.getBookType() == BookType.MAGAZINES).toList();
+                            List<Book> magazines = library.showBooks().stream().filter(book -> book.getBookType() == BookType.MAGAZINES).toList();
                             for(Book i : magazines){
                                 System.out.println(i.display());
                             }
                             break;
                         case 3:
-                            List<Book> studys = library.getBooks().stream().filter(book -> book.getBookType() == BookType.STUDYBOOKS).toList();
+                            List<Book> studys = library.showBooks().stream().filter(book -> book.getBookType() == BookType.STUDYBOOKS).toList();
                             for(Book i : studys){
                                 System.out.println(i.display());
                             }
@@ -185,6 +211,33 @@ public class Kutuphane {
                             System.out.println(a.display());
                         }
                     }
+                    break;
+                case 7:
+                    System.out.println("Ödünç alınacak kitabın ID'sini giriniz...");
+                    int girilen = scanner.nextInt();
+                    Book book = library.showBooks().stream().filter(book1 -> book1.getBookID() == girilen).toList().get(0);
+                    librarian.searchBook(girilen).get(0).setStatus(BookStatus.KIRALANDI);
+                    break;
+                case 8:
+                    System.out.println("Satın alınacak kitabın ID'sini giriniz.");
+                    int alinacak = scanner.nextInt();
+                    Book kitap  = library.showBooks().stream().filter(book1 -> book1.getBookID() == alinacak).toList().get(0);
+                    System.out.println("Kitabın ücretini karşılamak için ücretini giriniz."+kitap.getPrice());
+                    double ucret = scanner.nextDouble();
+                    if(ucret == kitap.getPrice()){
+                    librarian.searchBook(alinacak).get(0).setStatus(BookStatus.SATILDI);
+                    }else {
+                        System.out.println("Yanlış ücret girişi.");
+                    }
+                    break;
+                case 9:
+                    System.out.println("Geri alınacak kitabın ID'sini giriniz...");
+                    int geriAl = scanner.nextInt();
+                    Book geriKitap = library.showBooks().stream().filter(book1 -> book1.getBookID() == geriAl).toList().get(0);
+                    librarian.searchBook(geriAl).get(0).setStatus(BookStatus.BOSTA);
+                    break;
+                case 0:
+                    System.out.println("Otomasyondan çıkılıyor. İyi günler...");
                     break;
             }
 

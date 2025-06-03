@@ -28,9 +28,7 @@ public class Library {
         return instance;
     }
 
-    public Set<Book> getBooks() {
-        return books;
-    }
+
 
     public List<Reader> getReaders() {
         return readers;

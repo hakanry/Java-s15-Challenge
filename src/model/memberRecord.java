@@ -4,6 +4,7 @@ import model.book.Book;
 import model.person.Librarian;
 
 import java.util.Date;
+import java.util.HashSet;
 import java.util.Set;
 
 public class memberRecord {
@@ -18,11 +19,87 @@ public class memberRecord {
     private boolean aktifMi;
     private Librarian librarian;
 
-    public memberRecord(long memberID, MemberType type, Date dateOfMembership, Set<Book> noBookIssued, int maxBookLimit, String name, String address, String phoneNo, boolean aktifMi) {
+    public long getMemberID() {
+        return memberID;
+    }
+
+    public void setMemberID(long memberID) {
+        this.memberID = memberID;
+    }
+
+    public MemberType getType() {
+        return type;
+    }
+
+    public void setType(MemberType type) {
+        this.type = type;
+    }
+
+    public Date getDateOfMembership() {
+        return dateOfMembership;
+    }
+
+    public void setDateOfMembership(Date dateOfMembership) {
+        this.dateOfMembership = dateOfMembership;
+    }
+
+    public Set<Book> getNoBookIssued() {
+        return noBookIssued;
+    }
+
+    public void addIssuedBook(Book book) {
+        noBookIssued.add(book);
+    }
+
+    public int getMaxBookLimit() {
+        return maxBookLimit;
+    }
+
+    public void setMaxBookLimit(int maxBookLimit) {
+        this.maxBookLimit = maxBookLimit;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getAddress() {
+        return address;
+    }
+
+    public void setAddress(String address) {
+        this.address = address;
+    }
+
+    public String getPhoneNo() {
+        return phoneNo;
+    }
+
+    public void setPhoneNo(String phoneNo) {
+        this.phoneNo = phoneNo;
+    }
+
+    public void setAktifMi(boolean aktifMi) {
+        this.aktifMi = aktifMi;
+    }
+
+    public Librarian getLibrarian() {
+        return librarian;
+    }
+
+    public void setLibrarian(Librarian librarian) {
+        this.librarian = librarian;
+    }
+
+    public memberRecord(long memberID, MemberType type, Date dateOfMembership, int maxBookLimit, String name, String address, String phoneNo, boolean aktifMi) {
         this.memberID = memberID;
         this.type = type;
         this.dateOfMembership = dateOfMembership;
-        this.noBookIssued = noBookIssued;
+        this.noBookIssued = new HashSet<>();
         this.maxBookLimit = maxBookLimit;
         this.name = name;
         this.address = address;
@@ -38,7 +115,9 @@ public class memberRecord {
     public void getMember(){
        System.out.println(this.memberID+" ye sahip "+this.name+" isimli kullanıcıdır.");
    }
-   // public void incBookIssued(){}
+   public void incBookIssued(){
+
+   }
    // public void decBookIssued(){}
    // public void payBill(){}
 }
